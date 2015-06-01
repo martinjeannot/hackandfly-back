@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
+var players = require('./routes/players');
 var users = require('./routes/users');
 
 // BASE SETUP ----------------------------------------------------------------------------------------------------------
@@ -31,6 +32,7 @@ mongoose.connect('mongodb://localhost/hackandfly');
 // ROUTING -------------------------------------------------------------------------------------------------------------
 
 app.use('/', routes);
+app.use('/players', players);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
