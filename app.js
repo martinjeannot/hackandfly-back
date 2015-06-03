@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var players = require('./routes/players');
+var test = 0;
 
 // BASE SETUP ----------------------------------------------------------------------------------------------------------
 
