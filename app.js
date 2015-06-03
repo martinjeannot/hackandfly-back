@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // DB connection
-mongoose.connect('mongodb://localhost/hackandfly');
+mongoose.connect('mongodb://' + process.env.MONGO_USER + ':' + process.env.MONGO_PWD +'@ds063879.mongolab.com:63879/hackandfly');
 
 // ROUTING -------------------------------------------------------------------------------------------------------------
 
