@@ -9,9 +9,12 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
     Player.find(function (err, players) {
         if (err) {
-            res.send(err);
+            res
+                .status(500)
+                .send(err);
         }
         res
+            .status(200)
             .json(players);
     });
 });
@@ -19,7 +22,9 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     Player.findById(req.params.id, function (err, player) {
         if (err) {
-            res.send(err)
+            res
+                .status(500)
+                .send(err);
         }
         res
             .status(200)
@@ -41,7 +46,9 @@ router.post('/', function (req, res, next) {
             // save player into db
             player.save(function (err) {
                 if (err) {
-                    res.send(err);
+                    res
+                        .status(500)
+                        .send(err);
                 }
                 res
                     .status(201)
