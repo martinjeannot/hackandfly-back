@@ -10,6 +10,7 @@ This app is also available at : http://hack-and-fly.herokuapp.com/
 ## MODEL
 
 ### Player
+- _id : String
 - login : String
 - password : String
 - score : Integer
@@ -31,3 +32,6 @@ Create a new player, required parameters :
 
 *POST /players/authenticate*<br>
 Authenticate a player based on the given login and password
+
+*PUT /players/:id*<br>
+Update a player
