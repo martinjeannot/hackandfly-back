@@ -16,6 +16,17 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/:id', function (req, res, next) {
+    Player.findById(req.params.id, function (err, player) {
+        if (err) {
+            res.send(err)
+        }
+        res
+            .status(200)
+            .json(player);
+    })
+});
+
 // POST ----------------------------------------------------------------------------------------------------------------
 
 router.post('/', function (req, res, next) {
