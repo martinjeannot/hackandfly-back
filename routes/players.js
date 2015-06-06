@@ -29,7 +29,7 @@ router.get('/:id', function (req, res, next) {
         res
             .status(200)
             .json(player);
-    })
+    });
 });
 
 // POST ----------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ router.post('/', function (req, res, next) {
                     .status(201)
                     .json(player);
             });
-        })
+        });
     });
 });
 
@@ -73,6 +73,31 @@ router.post('/authenticate', function (req, res, next) {
             }
         });
     });
+});
+
+// PUT -----------------------------------------------------------------------------------------------------------------
+
+router.put('/:id', function (req, res, next) {
+    Player
+        .findById(req.params.id)
+        .exec()
+        .then(function (player) {
+            player.login = req.body.login;
+            player.password = req.body.password;
+            player.score = req.body.score;
+            player.save(function (err) {
+                if (err) {
+                    throw err;
+                }
+                res
+                    .status(200)
+                    .json(player);
+            });
+        }, function (err) {
+            res
+                .status(500)
+                .send(err);
+        });
 });
 
 module.exports = router;
