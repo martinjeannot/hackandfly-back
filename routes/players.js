@@ -9,11 +9,11 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
     Player.find(function (err, players) {
         if (err) {
-            res
+            return res
                 .status(500)
                 .send(err);
         }
-        res
+        return res
             .status(200)
             .json(players);
     });
@@ -22,11 +22,16 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     Player.findById(req.params.id, function (err, player) {
         if (err) {
-            res
+            return res
                 .status(500)
                 .send(err);
         }
-        res
+        if (!player) {
+            return res
+                .status(404)
+                .send();
+        }
+        return res
             .status(200)
             .json(player);
     });
@@ -47,11 +52,11 @@ router.post('/', function (req, res, next) {
             // save player into db
             player.save(function (err) {
                 if (err) {
-                    res
+                    return res
                         .status(500)
                         .send(err);
                 }
-                res
+                return res
                     .status(201)
                     .json(player);
             });
@@ -63,11 +68,11 @@ router.post('/authenticate', function (req, res, next) {
     Player.findOne({'login': req.body.login}, function (err, player) {
         bcrypt.compare(req.body.password, player.password, function (err, result) {
             if (result) {
-                res
+                return res
                     .status(200)
                     .json(player);
             } else {
-                res
+                return res
                     .status(401)
                     .send();
             }
@@ -89,12 +94,12 @@ router.put('/:id', function (req, res, next) {
                 if (err) {
                     throw err;
                 }
-                res
+                return res
                     .status(200)
                     .json(player);
             });
         }, function (err) {
-            res
+            return res
                 .status(500)
                 .send(err);
         });
