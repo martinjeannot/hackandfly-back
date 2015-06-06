@@ -37,6 +37,7 @@ router.get('/:id', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var player = new Player();
     player.login = req.body.login;
+    player.score = 0;
 
     // encrypt password
     bcrypt.genSalt(10, function (err, salt) {
