@@ -12,7 +12,6 @@ router.get('/', function (req, res, next) {
             res.send(err);
         }
         res
-            .type('json')
             .json(players);
     });
 });
@@ -34,11 +33,26 @@ router.post('/', function (req, res, next) {
                     res.send(err);
                 }
                 res
-                    .type('json')
                     .status(201)
                     .json(player);
             });
         })
+    });
+});
+
+router.post('/authenticate', function (req, res, next) {
+    Player.findOne({'login': req.body.login}, function (err, player) {
+        bcrypt.compare(req.body.password, player.password, function (err, result) {
+            if (result) {
+                res
+                    .status(200)
+                    .json(player);
+            } else {
+                res
+                    .status(401)
+                    .send();
+            }
+        });
     });
 });
 
