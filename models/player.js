@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PlayerSchema = new Schema({
-    login: String,
-    password: String
+    login: {type: String, required: true, index: {unique: true, sparse: true}},
+    password: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Player', PlayerSchema);
