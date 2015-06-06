@@ -5,6 +5,15 @@ Hack &amp; Fly - back end
 ```
 npm start
 ```
+This app is also available at : http://hack-and-fly.herokuapp.com/
+
+## MODEL
+
+### Player
+- login : String
+- password : String
+- score : Integer
+
 ## API
 
 ### Player
